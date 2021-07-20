@@ -1,4 +1,4 @@
-load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "nodejs_test", "pkg_npm")
+load("@build_bazel_rules_nodejs//:index.bzl", "nodejs_test")
 load("@npm//@bazel/typescript:index.bzl", "ts_library")
 load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
 
