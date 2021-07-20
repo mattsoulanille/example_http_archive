@@ -1,0 +1,30 @@
+load("@build_bazel_rules_nodejs//:index.bzl", "js_library", "nodejs_test", "pkg_npm")
+load("@npm//@bazel/typescript:index.bzl", "ts_library")
+load("@bazel_skylib//rules:copy_file.bzl", "copy_file")
+
+
+copy_file(
+    name = "copy_readme",
+    src = "@psimd_test//:readme_file",
+    out = "readme_copied.txt",
+)
+
+ts_library(
+    name = "print_stuff_lib",
+    srcs = [
+        "print.ts",
+    ],
+    deps = [
+        "@npm//@types/node",
+    ]
+)
+
+nodejs_test(
+    name = "print_stuff",
+    entry_point = ":print.ts",
+    data = [
+        ":print_stuff_lib",
+        ":copy_readme",
+        "@psimd_test//:readme_file",
+    ],
+)
